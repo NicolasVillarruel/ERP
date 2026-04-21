@@ -162,7 +162,7 @@ export default async function TraceabilityPage() {
           <CardHeader className="bg-primary/[0.02] border-b">
             <CardTitle className="text-lg">Explorador de Genealogía</CardTitle>
             <CardDescription>
-              {logs.length > 0 ? `Lote ${logs[0].lot_number}` : 'Seleccione un lote'}
+              {(logs as any[]).length > 0 ? `Lote ${(logs as any[])[0].lot_number}` : 'Seleccione un lote'}
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
@@ -180,8 +180,8 @@ export default async function TraceabilityPage() {
                   </div>
                   <div className="space-y-1">
                     <p className="text-xs font-bold uppercase text-primary">Producto Terminado</p>
-                    <p className="text-sm font-semibold">{logs[0]?.product?.name || "Ejemplo Motor V8"}</p>
-                    <p className="text-[10px] text-muted-foreground">O.F. {logs[0]?.mo_id?.split('-')[0] || "MO-0104"} | {logs[0] ? new Date(logs[0].created_at).toLocaleDateString() : '18/04/2026'}</p>
+                    <p className="text-sm font-semibold">{(logs as any[])[0]?.product?.name || "Ejemplo Motor V8"}</p>
+                    <p className="text-[10px] text-muted-foreground">O.F. {(logs as any[])[0]?.mo_id?.split('-')[0] || "MO-0104"} | {(logs as any[])[0] ? new Date((logs as any[])[0].created_at).toLocaleDateString() : '18/04/2026'}</p>
                   </div>
                 </div>
 
