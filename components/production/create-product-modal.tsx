@@ -36,7 +36,7 @@ export function CreateProductModal() {
     const formData = new FormData(e.currentTarget)
     
     // Fetch first organization_id
-    const { data: orgs } = await supabase.from('organizations').select('id').limit(1)
+    const { data: orgs } = await (supabase as any).from('organizations').select('id').limit(1)
     if (!orgs || orgs.length === 0) {
         alert("Primero debes crear una organización en la base de datos.")
         setLoading(false)
@@ -53,7 +53,7 @@ export function CreateProductModal() {
       active: true
     }
 
-    const { error } = await supabase.from("products").insert([payload])
+    const { error } = await (supabase as any).from("products").insert([payload])
 
     if (error) {
       console.error("Error creating product:", error)

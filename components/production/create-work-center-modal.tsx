@@ -28,7 +28,7 @@ export function CreateWorkCenterModal() {
 
     const formData = new FormData(e.currentTarget)
     
-    const { data: orgs } = await supabase.from('organizations').select('id').limit(1)
+    const { data: orgs } = await (supabase as any).from('organizations').select('id').limit(1)
     if (!orgs || orgs.length === 0) {
         alert("Primero debes crear una organización.")
         setLoading(false)
@@ -47,7 +47,7 @@ export function CreateWorkCenterModal() {
       }
     }
 
-    const { error } = await supabase.from("work_centers").insert([payload])
+    const { error } = await (supabase as any).from("work_centers").insert([payload])
 
     if (error) {
       console.error("Error creating work center:", error)

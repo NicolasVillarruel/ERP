@@ -37,7 +37,7 @@ export function CreateBomModal() {
   }, [open])
 
   const fetchProducts = async () => {
-    const { data } = await supabase.from('products').select('id, name').order('name')
+    const { data } = await (supabase as any).from('products').select('id, name').order('name')
     setProducts(data || [])
   }
 
@@ -47,7 +47,7 @@ export function CreateBomModal() {
 
     const formData = new FormData(e.currentTarget)
     
-    const { data: orgs } = await supabase.from('organizations').select('id').limit(1)
+    const { data: orgs } = await (supabase as any).from('organizations').select('id').limit(1)
     if (!orgs || orgs.length === 0) {
         alert("Primero debes crear una organización.")
         setLoading(false)
@@ -62,7 +62,7 @@ export function CreateBomModal() {
       active: true
     }
 
-    const { error } = await supabase.from("boms").insert([payload])
+    const { error } = await (supabase as any).from("boms").insert([payload])
 
     if (error) {
       console.error("Error creating BOM:", error)
