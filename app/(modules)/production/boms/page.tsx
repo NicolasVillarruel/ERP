@@ -15,9 +15,10 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { ChevronRight, Filter, Network, Search } from "lucide-react";
+import { ChevronRight, Network, Search, Plus } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { CreateBomModal } from "@/components/production/create-bom-modal";
+import { FilterDialog } from "@/components/production/filter-dialog";
 
 async function getBoms() {
   const { data, error } = await supabase
@@ -65,10 +66,7 @@ export default async function BomsPage() {
                 <Network className="h-4 w-4 text-primary" />
                 <span className="hidden sm:inline">Vista de Árbol</span>
               </Button>
-              <Button variant="outline" className="gap-2 shrink-0">
-                <Filter className="h-4 w-4" />
-                Filtros
-              </Button>
+              <FilterDialog type="boms" />
             </div>
           </div>
         </CardHeader>

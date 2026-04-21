@@ -15,10 +15,11 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { Filter, Search } from "lucide-react";
+import { Search, Plus } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Product } from "@/lib/types/database";
 import { CreateProductModal } from "@/components/production/create-product-modal";
+import { FilterDialog } from "@/components/production/filter-dialog";
 
 async function getProducts() {
   const { data, error } = await supabase
@@ -68,10 +69,7 @@ export default async function ProductsPage() {
                 className="w-full sm:max-w-sm pl-9 h-10 rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               />
             </div>
-            <Button variant="outline" className="gap-2 shrink-0">
-              <Filter className="h-4 w-4" />
-              Filtros
-            </Button>
+            <FilterDialog type="products" />
           </div>
         </CardHeader>
         <CardContent>

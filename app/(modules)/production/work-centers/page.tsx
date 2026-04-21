@@ -8,16 +8,19 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { 
+import { 
   Activity, 
   AlertCircle, 
   Clock, 
-  Info, 
   MoreHorizontal, 
   PauseCircle, 
-  PlayCircle 
+  PlayCircle,
+  CheckCircle2,
+  Factory
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { CreateWorkCenterModal } from "@/components/production/create-work-center-modal";
+import { ReportModal } from "@/components/production/report-modal";
 
 async function getWorkCenters() {
   const { data, error } = await supabase
@@ -61,10 +64,7 @@ export default async function WorkCentersPage() {
           <p className="text-muted-foreground">Monitoreo de disponibilidad y rendimiento en tiempo real.</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" className="gap-2">
-            <Info className="h-4 w-4" />
-            Reporte de Turno
-          </Button>
+          <ReportModal />
           <CreateWorkCenterModal />
         </div>
       </div>

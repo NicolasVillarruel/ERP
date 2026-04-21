@@ -15,10 +15,12 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { CalendarClock, Filter, PlayCircle, Search } from "lucide-react";
+import { CalendarClock, PlayCircle, Search, Plus } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { ManufacturingOrder } from "@/lib/types/database";
 import { CreateMoModal } from "@/components/production/create-mo-modal";
+import { FilterDialog } from "@/components/production/filter-dialog";
+import { ReportModal } from "@/components/production/report-modal";
 
 async function getManufacturingOrders() {
   const { data, error } = await supabase
@@ -81,10 +83,8 @@ export default async function ManufacturingOrdersPage() {
                 className="w-full pl-9 h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               />
             </div>
-            <Button variant="outline" size="sm" className="gap-2 shrink-0 h-9">
-              <Filter className="h-4 w-4" />
-              <span className="hidden sm:inline">Filtros</span>
-            </Button>
+            <ReportModal />
+            <FilterDialog type="orders" />
           </div>
         </CardHeader>
         <CardContent>
