@@ -10,15 +10,14 @@ import { Button } from "@/components/ui/button";
 import { 
   Activity, 
   AlertCircle, 
-  CheckCircle2, 
   Clock, 
-  Factory, 
   Info, 
   MoreHorizontal, 
   PauseCircle, 
   PlayCircle 
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { CreateWorkCenterModal } from "@/components/production/create-work-center-modal";
 
 async function getWorkCenters() {
   const { data, error } = await supabase
@@ -66,10 +65,7 @@ export default async function WorkCentersPage() {
             <Info className="h-4 w-4" />
             Reporte de Turno
           </Button>
-          <Button size="sm" className="gap-2">
-            <Factory className="h-4 w-4" />
-            Configurar Centro
-          </Button>
+          <CreateWorkCenterModal />
         </div>
       </div>
 

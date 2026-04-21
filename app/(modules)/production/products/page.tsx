@@ -15,9 +15,10 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { Filter, Plus, Search } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { Product } from "@/lib/types/database";
+import { CreateProductModal } from "@/components/production/create-product-modal";
 
 async function getProducts() {
   const { data, error } = await supabase
@@ -53,10 +54,7 @@ export default async function ProductsPage() {
           <h1 className="text-3xl font-bold tracking-tight">Productos</h1>
           <p className="text-muted-foreground">Gestiona el maestro de materiales, componentes y productos terminados.</p>
         </div>
-        <Button className="shrink-0 gap-2">
-          <Plus className="h-4 w-4" />
-          <span className="hidden sm:inline">Nuevo Producto</span>
-        </Button>
+        <CreateProductModal />
       </div>
 
       <Card>

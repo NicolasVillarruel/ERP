@@ -15,8 +15,9 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { ChevronRight, Filter, Network, Plus, Search } from "lucide-react";
+import { ChevronRight, Filter, Network, Search } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { CreateBomModal } from "@/components/production/create-bom-modal";
 
 async function getBoms() {
   const { data, error } = await supabase
@@ -45,10 +46,7 @@ export default async function BomsPage() {
           <h1 className="text-3xl font-bold tracking-tight">Listas de Materiales (BOM)</h1>
           <p className="text-muted-foreground">Gestiona recetas, componentes y secuencias de fabricación.</p>
         </div>
-        <Button className="shrink-0 gap-2">
-          <Plus className="h-4 w-4" />
-          <span className="hidden sm:inline">Nueva BOM</span>
-        </Button>
+        <CreateBomModal />
       </div>
 
       <Card>

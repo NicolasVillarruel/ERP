@@ -15,9 +15,10 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
-import { CalendarClock, Filter, PlayCircle, Plus, Search } from "lucide-react";
+import { CalendarClock, Filter, PlayCircle, Search } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { ManufacturingOrder } from "@/lib/types/database";
+import { CreateMoModal } from "@/components/production/create-mo-modal";
 
 async function getManufacturingOrders() {
   const { data, error } = await supabase
@@ -57,10 +58,7 @@ export default async function ManufacturingOrdersPage() {
           <h1 className="text-3xl font-bold tracking-tight">Órdenes de Fabricación</h1>
           <p className="text-muted-foreground">Monitoreo y ejecución de lotes de producción.</p>
         </div>
-        <Button className="shrink-0 gap-2">
-          <Plus className="h-4 w-4" />
-          <span className="hidden sm:inline">Crear Orden</span>
-        </Button>
+        <CreateMoModal />
       </div>
 
       <Card>
