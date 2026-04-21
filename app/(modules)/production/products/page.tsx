@@ -95,13 +95,13 @@ export default async function ProductsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {products.map((p) => (
+                {products.map((p: any) => (
                   <TableRow key={p.id}>
                     <TableCell className="font-medium">{p.internal_code}</TableCell>
                     <TableCell>{p.name}</TableCell>
                     <TableCell>{getTypeBadge(p.type)}</TableCell>
                     <TableCell className="text-right">
-                      ${p.cost_standard.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      ${(p.cost_standard || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                     </TableCell>
                     <TableCell className="text-muted-foreground uppercase text-xs">{p.uom}</TableCell>
                     <TableCell>
