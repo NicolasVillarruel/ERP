@@ -31,8 +31,8 @@ export default function ProductionLayout({
             <div className="hidden md:flex w-72 flex-col border-r bg-card shadow-sm">
                 <div className="p-6 border-b">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-primary rounded-2xl flex items-center justify-center shadow-sm">
-                            <Factory className="h-6 w-6 text-primary-foreground" />
+                        <div className="w-10 h-10 flex items-center justify-center">
+                            <Factory className="h-8 w-8 text-primary" />
                         </div>
                         <div>
                             <h1 className="text-2xl font-semibold tracking-tight">Producción</h1>
@@ -54,9 +54,6 @@ export default function ProductionLayout({
                     ))}
                 </nav>
 
-                <div className="p-4 border-t mt-auto">
-                    <ThemeToggle />
-                </div>
             </div>
 
             {/* Área principal */}
