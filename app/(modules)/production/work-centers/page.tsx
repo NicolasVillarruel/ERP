@@ -32,7 +32,7 @@ async function getWorkCenters() {
   }
   
   // Mix DB data with UI metrics (OEE/Status would normally come from an IoT integration or real-time table)
-  return (data || []).map(wc => ({
+  return (data || []).map((wc: any) => ({
     ...wc,
     status: (wc.attributes as any)?.status || "idle",
     oee: (wc.attributes as any)?.oee || 0,
