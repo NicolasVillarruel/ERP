@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { supabase } from "@/lib/supabase"
+import { getOrCreateOrganizationId } from "@/lib/get-or-create-org"
 import { useRouter } from "next/navigation"
 
 export function CreateMoModal() {
@@ -47,15 +48,15 @@ export function CreateMoModal() {
 
     const formData = new FormData(e.currentTarget)
     
-    const { data: orgs } = await (supabase as any).from('organizations').select('id').limit(1)
-    if (!orgs || orgs.length === 0) {
-        alert("Primero debes crear una organización.")
-        setLoading(false)
-        return
+    const orgId = await getOrCreateOrganizationId()
+    if (!orgId) {
+      alert("No se pudo obtener o crear la organización.")
+      setLoading(false)
+      return
     }
 
     const payload = {
-      organization_id: orgs[0].id,
+      organization_id: orgId,
       product_id: formData.get("product_id"),
       quantity_planned: parseFloat(formData.get("quantity") as string),
       quantity_produced: 0,

@@ -22,6 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { supabase } from "@/lib/supabase"
+import { getOrCreateOrganizationId } from "@/lib/get-or-create-org"
 import { useRouter } from "next/navigation"
 
 export function CreateProductModal() {
@@ -36,15 +37,16 @@ export function CreateProductModal() {
     const formData = new FormData(e.currentTarget)
     
     // Fetch first organization_id
-    const { data: orgs } = await (supabase as any).from('organizations').select('id').limit(1)
-    if (!orgs || orgs.length === 0) {
-        alert("Primero debes crear una organización en la base de datos.")
-        setLoading(false)
-        return
+    // Fetch or create organization
+    const orgId = await getOrCreateOrganizationId()
+    if (!orgId) {
+      alert("No se pudo obtener o crear la organización. Revisa los permisos de la base de datos.")
+      setLoading(false)
+      return
     }
 
     const payload = {
-      organization_id: orgs[0].id,
+      organization_id: orgId,
       name: formData.get("name"),
       internal_code: formData.get("internal_code"),
       type: formData.get("type"),
