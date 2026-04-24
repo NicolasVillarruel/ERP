@@ -62,8 +62,7 @@ export function CreateMoModal() {
       quantity_planned: parseFloat(formData.get("quantity") as string),
       quantity_produced: 0,
       status: "draft",
-      priority: parseInt(formData.get("priority") as string),
-      planned_start: new Date().toISOString()
+      priority: parseInt(formData.get("priority") as string)
     }
 
     const { error } = await createProductionRecord("manufacturing_orders", payload)

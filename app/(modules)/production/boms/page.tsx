@@ -16,11 +16,12 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { ChevronRight, Network, Search, Plus } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase";
 import { CreateBomModal } from "@/components/production/create-bom-modal";
 import { FilterDialog } from "@/components/production/filter-dialog";
 
 async function getBoms() {
+  const supabase = supabaseAdmin()
   const { data, error } = await supabase
     .from('boms')
     .select(`

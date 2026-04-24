@@ -40,7 +40,6 @@ export function CreateWorkCenterModal() {
     const payload = {
       organization_id: orgId,
       name: formData.get("name"),
-      code: formData.get("code"),
       type: formData.get("type"),
       attributes: {
         status: "idle",
@@ -82,15 +81,9 @@ export function CreateWorkCenterModal() {
               <Label htmlFor="name">Nombre del Centro</Label>
               <Input id="name" name="name" placeholder="Ej: Línea de Ensamblaje A" required />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="code">Código</Label>
-                <Input id="code" name="code" placeholder="WC-01" required />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="type">Tipo</Label>
-                <Input id="type" name="type" placeholder="Manual, CNC, etc." required />
-              </div>
+            <div className="grid gap-2">
+              <Label htmlFor="type">Tipo</Label>
+              <Input id="type" name="type" placeholder="Manual, CNC, Ensamblaje, etc." required />
             </div>
           </div>
           <DialogFooter>

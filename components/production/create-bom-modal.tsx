@@ -60,8 +60,7 @@ export function CreateBomModal() {
       organization_id: orgId,
       product_id: formData.get("product_id"),
       name: formData.get("name"),
-      version: 1,
-      active: true
+      version: 1
     }
 
     const { error } = await createProductionRecord("boms", payload)

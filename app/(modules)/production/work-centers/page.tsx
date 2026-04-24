@@ -17,11 +17,12 @@ import {
   CheckCircle2,
   Factory
 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase";
 import { CreateWorkCenterModal } from "@/components/production/create-work-center-modal";
 import { ReportModal } from "@/components/production/report-modal";
 
 async function getWorkCenters() {
+  const supabase = supabaseAdmin()
   const { data, error } = await supabase
     .from('work_centers')
     .select('*')

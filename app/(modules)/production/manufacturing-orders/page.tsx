@@ -16,13 +16,14 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { CalendarClock, PlayCircle, Search, Plus } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase";
 import { ManufacturingOrder } from "@/lib/types/database";
 import { CreateMoModal } from "@/components/production/create-mo-modal";
 import { FilterDialog } from "@/components/production/filter-dialog";
 import { ReportModal } from "@/components/production/report-modal";
 
 async function getManufacturingOrders() {
+  const supabase = supabaseAdmin()
   const { data, error } = await supabase
     .from('manufacturing_orders')
     .select(`

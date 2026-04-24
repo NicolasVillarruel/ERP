@@ -16,12 +16,13 @@ import {
   TableRow 
 } from "@/components/ui/table";
 import { Search, Plus } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase";
 import { Product } from "@/lib/types/database";
 import { CreateProductModal } from "@/components/production/create-product-modal";
 import { FilterDialog } from "@/components/production/filter-dialog";
 
 async function getProducts() {
+  const supabase = supabaseAdmin()
   const { data, error } = await supabase
     .from('products')
     .select('*')
