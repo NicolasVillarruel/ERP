@@ -21,6 +21,8 @@ import { Product } from "@/lib/types/database";
 import { CreateProductModal } from "@/components/production/create-product-modal";
 import { FilterDialog } from "@/components/production/filter-dialog";
 
+export const dynamic = 'force-dynamic'
+
 async function getProducts() {
   const supabase = supabaseAdmin()
   const { data, error } = await supabase

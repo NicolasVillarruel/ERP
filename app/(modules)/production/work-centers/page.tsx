@@ -20,6 +20,9 @@ import {
 import { supabaseAdmin } from "@/lib/supabase";
 import { CreateWorkCenterModal } from "@/components/production/create-work-center-modal";
 import { ReportModal } from "@/components/production/report-modal";
+import { FilterDialog } from "@/components/production/filter-dialog";
+
+export const dynamic = 'force-dynamic'
 
 async function getWorkCenters() {
   const supabase = supabaseAdmin()
@@ -32,6 +35,8 @@ async function getWorkCenters() {
     console.error("Error fetching work centers:", error);
     return [];
   }
+  
+  console.log(`Fetched ${data?.length || 0} work centers for display.`);
   
   // Mix DB data with UI metrics (OEE/Status would normally come from an IoT integration or real-time table)
   return (data || []).map((wc: any) => ({

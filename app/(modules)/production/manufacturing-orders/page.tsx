@@ -21,6 +21,9 @@ import { ManufacturingOrder } from "@/lib/types/database";
 import { CreateMoModal } from "@/components/production/create-mo-modal";
 import { FilterDialog } from "@/components/production/filter-dialog";
 import { ReportModal } from "@/components/production/report-modal";
+import Link from "next/link";
+
+export const dynamic = 'force-dynamic'
 
 async function getManufacturingOrders() {
   const supabase = supabaseAdmin()
@@ -154,7 +157,9 @@ export default async function ManufacturingOrdersPage() {
                             Iniciar
                           </Button>
                         ) : (
-                          <Button variant="ghost" size="sm" className="h-8 text-primary">Ver</Button>
+                          <Link href={`/production/manufacturing-orders/${mo.id}`}>
+                            <Button variant="ghost" size="sm" className="h-8 text-primary">Ver</Button>
+                          </Link>
                         )}
                       </TableCell>
                     </TableRow>

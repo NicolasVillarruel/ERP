@@ -20,6 +20,10 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { CreateBomModal } from "@/components/production/create-bom-modal";
 import { FilterDialog } from "@/components/production/filter-dialog";
 
+import Link from "next/link";
+
+export const dynamic = 'force-dynamic'
+
 async function getBoms() {
   const supabase = supabaseAdmin()
   const { data, error } = await supabase
@@ -63,10 +67,12 @@ export default async function BomsPage() {
               />
             </div>
             <div className="flex gap-2">
-               <Button variant="outline" className="gap-2 shrink-0">
-                <Network className="h-4 w-4 text-primary" />
-                <span className="hidden sm:inline">Vista de Árbol</span>
-              </Button>
+               <Link href={`/production/boms`}>
+                 <Button variant="outline" className="gap-2 shrink-0">
+                  <Network className="h-4 w-4 text-primary" />
+                  <span className="hidden sm:inline">Vista de Árbol</span>
+                </Button>
+               </Link>
               <FilterDialog type="boms" />
             </div>
           </div>
@@ -112,7 +118,9 @@ export default async function BomsPage() {
                       )}
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button variant="ghost" size="sm" className="text-primary">Ver Detalle</Button>
+                      <Link href={`/production/boms/${b.id}`}>
+                        <Button variant="ghost" size="sm" className="text-primary">Ver Detalle</Button>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))}
