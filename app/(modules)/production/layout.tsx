@@ -26,9 +26,20 @@ export default function ProductionLayout({
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="flex h-screen bg-background">
-            {/* Sidebar Desktop - Diseño mejorado */}
-            <div className="hidden md:flex w-72 flex-col border-r bg-card shadow-sm">
+        <div className="flex h-screen bg-background overflow-hidden">
+            {/* Mobile Overlay */}
+            {open && (
+                <div 
+                    className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden"
+                    onClick={() => setOpen(false)}
+                />
+            )}
+
+            {/* Sidebar */}
+            <div className={`
+                fixed inset-y-0 left-0 z-50 w-72 flex flex-col border-r bg-card shadow-sm transform transition-transform duration-200 ease-in-out md:relative md:translate-x-0
+                ${open ? "translate-x-0" : "-translate-x-full"}
+            `}>
                 <div className="p-6 border-b">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 flex items-center justify-center">
@@ -74,7 +85,7 @@ export default function ProductionLayout({
                 </header>
 
                 {/* Contenido */}
-                <main className="flex-1 overflow-auto p-8 bg-background">
+                <main className="flex-1 overflow-auto p-4 md:p-8 bg-background">
                     {children}
                 </main>
             </div>

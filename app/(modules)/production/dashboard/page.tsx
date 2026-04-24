@@ -124,7 +124,7 @@ export default async function ProductionDashboard() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         
         {/* Recents Table */}
-        <Card className="col-span-4 lg:col-span-5">
+        <Card className="col-span-1 md:col-span-2 lg:col-span-5 overflow-hidden flex flex-col">
           <CardHeader>
             <CardTitle>Órdenes Recientes</CardTitle>
             <CardDescription>
@@ -177,7 +177,7 @@ export default async function ProductionDashboard() {
         </Card>
 
         {/* Activity Feed */}
-        <Card className="col-span-4 lg:col-span-2">
+        <Card className="col-span-1 md:col-span-2 lg:col-span-2">
           <CardHeader>
             <CardTitle>Actividad</CardTitle>
             <CardDescription>Centros de trabajo</CardDescription>
