@@ -1,12 +1,16 @@
-import { supabase } from "@/lib/supabase"
+"use server"
+
+import { supabaseAdmin } from "@/lib/supabase"
 
 /**
  * Gets the first organization ID, creating a default one if none exists.
  * This prevents the "must create organization first" error for new setups.
  */
 export async function getOrCreateOrganizationId(): Promise<string | null> {
+  const supabase = supabaseAdmin()
+  
   // Try to fetch existing org
-  const { data: orgs } = await (supabase as any)
+  const { data: orgs } = await supabase
     .from('organizations')
     .select('id')
     .limit(1)
@@ -16,7 +20,7 @@ export async function getOrCreateOrganizationId(): Promise<string | null> {
   }
 
   // No org found — create a default one
-  const { data: newOrg, error } = await (supabase as any)
+  const { data: newOrg, error } = await supabase
     .from('organizations')
     .insert([{
       name: 'Mi Empresa',

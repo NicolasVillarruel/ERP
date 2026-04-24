@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/select"
 import { supabase } from "@/lib/supabase"
 import { getOrCreateOrganizationId } from "@/lib/get-or-create-org"
+import { createProductionRecord } from "@/lib/actions/production"
 import { useRouter } from "next/navigation"
 
 export function CreateMoModal() {
@@ -65,11 +66,11 @@ export function CreateMoModal() {
       planned_start: new Date().toISOString()
     }
 
-    const { error } = await (supabase as any).from("manufacturing_orders").insert([payload])
+    const { error } = await createProductionRecord("manufacturing_orders", payload)
 
     if (error) {
       console.error("Error creating MO:", error)
-      alert("Error al crear Orden: " + error.message)
+      alert("Error al crear Orden: " + error)
     } else {
       setOpen(false)
       router.refresh()

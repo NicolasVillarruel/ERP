@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { supabase } from "@/lib/supabase"
 import { getOrCreateOrganizationId } from "@/lib/get-or-create-org"
+import { createProductionRecord } from "@/lib/actions/production"
 import { useRouter } from "next/navigation"
 
 export function CreateWorkCenterModal() {
@@ -48,11 +49,11 @@ export function CreateWorkCenterModal() {
       }
     }
 
-    const { error } = await (supabase as any).from("work_centers").insert([payload])
+    const { error } = await createProductionRecord("work_centers", payload)
 
     if (error) {
       console.error("Error creating work center:", error)
-      alert("Error al crear centro de trabajo: " + error.message)
+      alert("Error al crear centro de trabajo: " + error)
     } else {
       setOpen(false)
       router.refresh()

@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/select"
 import { supabase } from "@/lib/supabase"
 import { getOrCreateOrganizationId } from "@/lib/get-or-create-org"
+import { createProductionRecord } from "@/lib/actions/production"
 import { useRouter } from "next/navigation"
 
 export function CreateBomModal() {
@@ -63,11 +64,11 @@ export function CreateBomModal() {
       active: true
     }
 
-    const { error } = await (supabase as any).from("boms").insert([payload])
+    const { error } = await createProductionRecord("boms", payload)
 
     if (error) {
       console.error("Error creating BOM:", error)
-      alert("Error al crear BOM: " + error.message)
+      alert("Error al crear BOM: " + error)
     } else {
       setOpen(false)
       router.refresh()
