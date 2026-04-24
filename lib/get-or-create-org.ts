@@ -23,10 +23,7 @@ export async function getOrCreateOrganizationId(): Promise<string | null> {
   const { data: newOrg, error } = await (supabase as any)
     .from('organizations')
     .insert([{
-      name: 'Mi Empresa',
-      country: 'PE',
-      currency: 'USD',
-      active: true
+      name: 'Mi Empresa'
     }])
     .select('id')
     .single()
