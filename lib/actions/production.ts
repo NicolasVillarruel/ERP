@@ -12,3 +12,17 @@ export async function createProductionRecord(table: string, payload: any) {
   }
   return { data }
 }
+
+export async function getProducts() {
+  const supabase = supabaseAdmin()
+  const { data, error } = await (supabase as any)
+    .from('products')
+    .select('id, name')
+    .order('name')
+  
+  if (error) {
+    console.error('Error fetching products:', error)
+    return { error: error.message, data: null }
+  }
+  return { data, error: null }
+}

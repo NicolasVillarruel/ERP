@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select"
 import { supabase } from "@/lib/supabase"
 import { getOrCreateOrganizationId } from "@/lib/get-or-create-org"
-import { createProductionRecord } from "@/lib/actions/production"
+import { createProductionRecord, getProducts } from "@/lib/actions/production"
 import { useRouter } from "next/navigation"
 
 export function CreateBomModal() {
@@ -39,7 +39,7 @@ export function CreateBomModal() {
   }, [open])
 
   const fetchProducts = async () => {
-    const { data } = await (supabase as any).from('products').select('id, name').order('name')
+    const { data } = await getProducts()
     setProducts(data || [])
   }
 
