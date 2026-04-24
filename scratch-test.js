@@ -13,19 +13,23 @@ const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE
 
 async function main() {
   const orgId = '74f62958-8bb2-4691-9965-609f7ba334e9';
+  const typesToTest = ['machine', 'labor', 'assembly', 'quality', 'manual', 'Manual'];
 
-  // Get a real product id
-  const products = await supabase.from('products').select('id').limit(1);
-  const productId = products.data[0].id;
-  console.log('Using product id:', productId);
-
-  // Test manufacturing_orders with real uuid
-  const mo1 = await supabase.from('manufacturing_orders').insert([{ organization_id: orgId, product_id: productId, quantity_planned: 1 }]).select();
-  console.log('manufacturing_orders insert:', mo1.error ? mo1.error : 'success');
-  
-  if (mo1.data && mo1.data[0]) {
-    console.log('manufacturing_orders actual columns:', Object.keys(mo1.data[0]));
-    await supabase.from('manufacturing_orders').delete().eq('id', mo1.data[0].id);
+  for (const t of typesToTest) {
+    console.log(`Testing type: ${t}`);
+    const { error } = await supabase.from('work_centers').insert([{ 
+      organization_id: orgId, 
+      name: `Test ${t}`, 
+      type: t,
+      attributes: {}
+    }]);
+    if (error) {
+      console.log(`  Error: ${error.message}`);
+    } else {
+      console.log(`  Success!`);
+      // Cleanup
+      await supabase.from('work_centers').delete().eq('name', `Test ${t}`);
+    }
   }
 }
 

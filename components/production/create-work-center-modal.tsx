@@ -14,6 +14,13 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { supabase } from "@/lib/supabase"
 import { getOrCreateOrganizationId } from "@/lib/get-or-create-org"
 import { createProductionRecord } from "@/lib/actions/production"
@@ -83,7 +90,17 @@ export function CreateWorkCenterModal() {
             </div>
             <div className="grid gap-2">
               <Label htmlFor="type">Tipo</Label>
-              <Input id="type" name="type" placeholder="Manual, CNC, Ensamblaje, etc." required />
+              <Select name="type" required>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecciona el tipo" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="machine">Máquina</SelectItem>
+                  <SelectItem value="labor">Mano de Obra</SelectItem>
+                  <SelectItem value="assembly">Ensamblaje</SelectItem>
+                  <SelectItem value="quality">Control de Calidad</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
           <DialogFooter>
