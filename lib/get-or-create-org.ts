@@ -10,7 +10,7 @@ export async function getOrCreateOrganizationId(): Promise<string | null> {
   const supabase = supabaseAdmin()
   
   // Try to fetch existing org
-  const { data: orgs } = await supabase
+  const { data: orgs } = await (supabase as any)
     .from('organizations')
     .select('id')
     .limit(1)
@@ -20,7 +20,7 @@ export async function getOrCreateOrganizationId(): Promise<string | null> {
   }
 
   // No org found — create a default one
-  const { data: newOrg, error } = await supabase
+  const { data: newOrg, error } = await (supabase as any)
     .from('organizations')
     .insert([{
       name: 'Mi Empresa',

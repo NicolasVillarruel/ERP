@@ -4,7 +4,7 @@ import { supabaseAdmin } from "@/lib/supabase"
 
 export async function createProductionRecord(table: string, payload: any) {
   const supabase = supabaseAdmin()
-  const { data, error } = await supabase.from(table).insert([payload]).select()
+  const { data, error } = await (supabase as any).from(table).insert([payload]).select()
   
   if (error) {
     console.error(`Error inserting into ${table}:`, error)
